@@ -10,11 +10,25 @@ function handleHttpErrors(res) {
 function apiFacade() {
     /* Insert utility-methods from a later step (d) here (REMEMBER to uncomment in the returned object when you do)*/
 
-    const login = (user, password) => {
+    const login = (user, password, assignRole) => {
         const options = makeOptions("POST", true, { username: user, password: password });
         return fetch(URL + "/api/login", options)
             .then(handleHttpErrors)
-            .then(res => { setToken(res.token) })
+            .then(res => {
+                setToken(res.token)
+                assignRole(res.roles[0])
+                console.log(res)
+            })
+    }
+
+    const signup = (user, password, setResponseText) => {
+        const options = makeOptions("POST", false, { username: user, password: password });
+        return fetch(URL + "/api/createuser", options)
+            .then(handleHttpErrors)
+            .then(res => {
+                setResponseText(res.msg);
+                // console.log(res.msg);
+            })
     }
 
     const fetchUserData = (role) => {
@@ -22,10 +36,10 @@ function apiFacade() {
         return fetch(URL + `/api/info/${role}`, options).then(handleHttpErrors);
     }
 
-    const fetchBeerJoke = () => {
-        const options = makeOptions("GET", false); //True add's the token
-        return fetch(URL + "/api/xxx/data", options).then(handleHttpErrors);
-    }
+    // const fetchBeerJoke = () => {
+    //     const options = makeOptions("GET", false); //True add's the token
+    //     return fetch(URL + "/api/xxx/data", options).then(handleHttpErrors);
+    // }
 
     const setToken = (token) => {
         localStorage.setItem('jwtToken', token)
@@ -66,9 +80,9 @@ function apiFacade() {
         getToken,
         loggedIn,
         login,
+        signup,
         logout,
-        fetchUserData,
-        fetchBeerJoke
+        fetchUserData
     }
 }
 
