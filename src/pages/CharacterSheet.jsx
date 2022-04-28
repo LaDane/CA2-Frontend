@@ -1,9 +1,10 @@
 import React from "react";
+import CSheet from "../components/CharacterSheet/CSheet";
 
-const CharacterSheet = () => {
+const CharacterSheet = ({ characterId }) => {
 	return (
 		<div>
-			<h1>Character Sheet</h1>
+			<CSheet characterId={characterId} />
 		</div>
 	);
 };

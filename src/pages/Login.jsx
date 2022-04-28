@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LoginBox from "../components/Login/LoginBox";
 import facade from "../apiFacade";
 
-const Login = ({ loggedIn, setLoggedIn, assignRole }) => {
+const Login = ({ loggedIn, setLoggedIn, assignRole, setUsername }) => {
 	const init = { username: "", password: "" };
 	const [loginCredentials, setLoginCredentials] = useState(init);
 
@@ -19,6 +19,7 @@ const Login = ({ loggedIn, setLoggedIn, assignRole }) => {
 	const login = (user, pass) => {
 		facade.login(user, pass, assignRole).then((res) => {
 			setLoggedIn(true);
+			setUsername(user);
 			navigate("/");
 		});
 	};

@@ -19,17 +19,22 @@ import CreateCharacter from "./pages/CreateCharacter";
 import Signup from "./pages/Signup";
 import Users from "./pages/Users";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Setup from "./pages/Setup";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [userRole, setUserRole] = useState("");
+	const [username, setUsername] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
+	const [characterId, setCharacterId] = useState(0);
 
 	// Login / Logout
 	const logout = () => {
 		facade.logout();
 		setLoggedIn(false);
 		setUserRole("");
+		setUsername("");
+		setCharacterId(0);
 	};
 
 	// Role
@@ -44,7 +49,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Router>
+			<Router basename="/dnd">
 				<Sidebar isOpen={isOpen} toggle={toggle} />
 				<Navbar toggle={toggle} userRole={userRole} logout={logout} />
 
@@ -53,14 +58,16 @@ function App() {
 					<Route path="/about" element={<About />} />
 					<Route path="/backgrounds" element={<Backgrounds />} />
 
-					<Route path="/characters" element={<Characters />} />
-					<Route path="/character-sheet" element={<CharacterSheet />} />
-					<Route path="/create-character" element={<CreateCharacter />} />
+					<Route path="/characters" element={<Characters username={username} setCharacterId={setCharacterId} />} />
+					<Route path="/character-sheet" element={<CharacterSheet characterId={characterId} />} />
+					<Route path="/create-character" element={<CreateCharacter username={username} />} />
 
-					<Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} assignRole={assignRole} />} />
+					<Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} assignRole={assignRole} setUsername={setUsername} />} />
 					<Route path="/signup" element={<Signup />} />
 
 					<Route path="/users" element={<Users />} />
+
+					<Route path="/setup" element={<Setup />} />
 				</Routes>
 			</Router>
 		</div>

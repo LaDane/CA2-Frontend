@@ -50,7 +50,9 @@ const SignupBox = ({ onChange, performSignup, responseText }) => {
 							</i>
 						</div>
 					</div>
-					<button onClick={onClick}>Signup</button>
+					<button className="signup-btn" onClick={onClick}>
+						Signup
+					</button>
 					<p className="status-text">{responseText}</p>
 				</form>
 			</div>

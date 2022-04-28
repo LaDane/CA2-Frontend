@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
+import BGround from "./BGround";
+import "./BGrounds.css";
 
-const BGrounds = () => {
-    return (
-    <div>
+const BGrounds = ({ backgrounds }) => {
+	return (
+		<div className="container">
+			{backgrounds.map((bground) => {
+				return <BGround key={bground.id} bground={bground} />;
+			})}
+		</div>
+	);
+};
 
-    </div>
-  )
-
-
-}
-
-
-
-export default 
+export default BGrounds;

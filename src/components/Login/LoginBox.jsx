@@ -50,7 +50,9 @@ const LoginBox = ({ loggedIn, onChange, performLogin }) => {
 							</i>
 						</div>
 					</div>
-					<button onClick={onClick}>Login</button>
+					<button className="login-btn" onClick={onClick}>
+						Login
+					</button>
 					{/* <p className="status-text">{responseText}</p> */}
 				</form>
 			</div>

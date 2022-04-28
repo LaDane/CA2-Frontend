@@ -78,7 +78,7 @@ form input {
 	text-decoration: underline;
 }
 
-form button {
+.signup-btn {
 	height: 50px;
 	width: 200px;
 	margin-top: 30px;
@@ -93,7 +93,7 @@ form button {
 	transition: all 0.3s ease;
 }
 
-form button:hover {
+.signup-btn:hover {
 	background: #0093b8;
 }
 
